@@ -1,0 +1,5 @@
+ 	X=audio_df._get_numeric_data()
+        X_scaled=scaler2.transform(X)
+        X_predict_cluster=kmeans2.predict(X_scaled)[0]
+        song_to_recommend=clus_df[clus_df.cluster==X_predict_cluster].sample(1)
+        song_to_recommend_uri=song_to_recommend.uri.values
