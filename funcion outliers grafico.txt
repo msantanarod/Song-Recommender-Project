@@ -1,0 +1,18 @@
+ funcion para representar outliers graficamente
+%matplotlib inline
+
+def mpl_plot(avg, highlight):
+    fig = Figure()
+    FigureCanvas(fig) # not needed in mpl >= 3.1
+    ax = fig.add_subplot()
+    avg.plot(ax=ax)
+    if len(highli
+def find_outliers(variable='Temperature', window=30, sigma=10, view_fn=mpl_plot):
+    avg = data[variable].rolling(window=window).mean()
+    residual = data[variable] - avg
+    std = residual.rolling(window=window).std()
+    outliers = (np.abs(residual) > std * sigma)
+    return view_fn(avg, avg[outliers])
+We can call the function with parameters and get a plot:
+
+find_outliers(variable='Temperature', window=20, sigma=10)
